@@ -5,7 +5,7 @@ import PointLike, {
 import {
   clamp,
   hypotenuse,
-  cycle as cycleNumber,
+  cycleNumber,
   transform,
   cubicBezier,
 } from '@nekobird/piko';

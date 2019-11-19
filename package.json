@@ -1,0 +1,52 @@
+{
+  "name": "@nekobird/vector2",
+  "version": "0.0.1",
+  "private": false,
+  "description": "Vector2 library.",
+  "keywords": [
+    "nekobird",
+    "vector2"
+  ],
+  "homepage": "https://github.com/nekobird/vector2#readme",
+  "bugs": {
+    "url": "https://github.com/nekobird/vector2/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nekobird/vector2.git"
+  },
+  "license": "MIT",
+  "author": "Andrew Prasetya",
+  "files": [
+    "build/**/*"
+  ],
+  "sideEffects": false,
+  "main": "build/commonjs/vector2.js",
+  "module": "build/esm/vector2.js",
+  "jsnext:main": "build/esm/piko.js",
+  "scripts": {
+    "build": "npm run clean; tsc --emitDeclarationOnly --outDir build/types/; rollup -c rollup.config.js",
+    "clean": "rimraf build",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@nekobird/piko": "0.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-transform-typescript": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-typescript": "^7.7.2",
+    "rimraf": "^3.0.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^5.1.2",
+    "rollup-plugin-typescript": "^1.0.1",
+    "tslib": "^1.10.0",
+    "typescript": "^3.7.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

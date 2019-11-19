@@ -1,13 +1,14 @@
-import PointLike from './point-like';
+import PointLike, {
+  isPointLike,
+} from './point-like';
 
 import {
   clamp,
   hypotenuse,
-  isPointLike,
-  cycleNumber,
+  cycle as cycleNumber,
   transform,
   cubicBezier,
-} from './util';
+} from '@nekobird/piko';
 
 import {
   differenceClockwise,

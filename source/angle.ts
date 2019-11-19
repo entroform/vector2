@@ -1,6 +1,6 @@
 import {
-  cycleNumber,
-} from './util';
+  cycle as cycleNumber,
+} from '@nekobird/piko';
 
 export function toDegrees(radians: number): number {
   return radians * (180 / Math.PI);

@@ -1,14 +1,14 @@
+import {
+  clamp,
+  cubicBezier,
+  cycleNumber,
+  hypotenuse,
+  transform,
+} from '@nekobird/piko';
+
 import PointLike, {
   isPointLike,
 } from './point-like';
-
-import {
-  clamp,
-  hypotenuse,
-  cycleNumber,
-  transform,
-  cubicBezier,
-} from '@nekobird/piko';
 
 import {
   differenceClockwise,
@@ -16,7 +16,6 @@ import {
 } from './angle';
 
 // Glossary
-
 // point: An object containing x and y numbers, representing position in the cartesian plane.
 // length: Magnitude between two vectors OR magnitude of a vector.
 // displacement: A vector, representing the distance and direction of one point to another.

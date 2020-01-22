@@ -37,9 +37,7 @@ export class Vector2 {
     } else if (typeof a === 'number' && typeof b !== 'number') {
       this.x = a;
       this.y = a;
-    } else if (isPointLike(a) === true) {
-      a = a as PointLike;
-
+    } else if (isPointLike(a)) {
       this.x = a.x;
       this.y = a.y;
     }
@@ -58,9 +56,7 @@ export class Vector2 {
     } else if (typeof a === 'number' && typeof b !== 'number') {
       this.x = a;
       this.y = a;
-    } else if (isPointLike(a) === true) {
-      a = a as PointLike;
-
+    } else if (isPointLike(a)) {
       this.x = a.x;
       this.y = a.y;
     }
@@ -169,9 +165,7 @@ export class Vector2 {
   public add(v: Vector2): this;
   public add(p: PointLike): this;
   public add(a: number | PointLike, b?: number): this {
-    if (isPointLike(a) === true) {
-      a = a as PointLike;
-
+    if (isPointLike(a)) {
       this.x += a.x;
       this.y += a.y;
     } else if (typeof a === 'number' && typeof b === 'number') {
@@ -216,9 +210,7 @@ export class Vector2 {
   public subtract(v: Vector2): this;
   public subtract(p: PointLike): this;
   public subtract(a: number | PointLike, b?: number): this {
-    if (isPointLike(a) === true) {
-      a = a as PointLike;
-
+    if (isPointLike(a)) {
       this.x -= a.x;
       this.y -= a.y;
     } else if (typeof a === 'number' && typeof b !== 'number') {
@@ -263,9 +255,7 @@ export class Vector2 {
   public multiply(v: Vector2): this;
   public multiply(p: PointLike): this;
   public multiply(a: number | PointLike, b?: number): this {
-    if (isPointLike(a) === true) {
-      a = a as PointLike;
-
+    if (isPointLike(a)) {
       this.x *= a.x;
       this.y *= a.y;
     } else if (typeof a === 'number' && typeof b !== 'number') {
@@ -285,7 +275,7 @@ export class Vector2 {
   public multiplyX(a: number | PointLike): this {
     if (typeof a === 'number') {
       this.x *= a;
-    } else if (isPointLike(a) === true) {
+    } else if (isPointLike(a)) {
       this.x *= a.x;
     }
 
@@ -298,7 +288,7 @@ export class Vector2 {
   public multiplyY(a: number | PointLike): this {
     if (typeof a === 'number') {
       this.y *= a;
-    } else if (isPointLike(a) === true) {
+    } else if (isPointLike(a)) {
       this.y *= a.y;
     }
 
@@ -324,9 +314,7 @@ export class Vector2 {
         this.x /= a;
         this.y /= b;
       }
-    } else if (isPointLike(a) === true) {
-      a = a as PointLike;
-
+    } else if (isPointLike(a)) {
       if (a.x === 0 || a.y === 0) {
         throw new Error('Vector2: Division by zero.');
       } else {
@@ -348,9 +336,7 @@ export class Vector2 {
       } else {
         this.x /= a;
       }
-    } else if (isPointLike(a) === true) {
-      a = a as PointLike;
-
+    } else if (isPointLike(a)) {
       if (a.x === 0) {
         throw new Error('Vector2: Division by zero.');
       } else {
@@ -432,12 +418,13 @@ export class Vector2 {
   public moveBy(x: number): this;
   public moveBy(x: number, y: number): this;
   public moveBy(a: number | PointLike, b?: number): this {
-    if (typeof a === 'number' && typeof b === 'number') {
+    if (
+      typeof a === 'number'
+      && typeof b === 'number'
+    ) {
       this.x += a;
       this.y += b;
-    } else if (isPointLike(a) === true) {
-      a = a as PointLike;
-
+    } else if (isPointLike(a)) {
       this.add(a);
     }
 
@@ -447,12 +434,13 @@ export class Vector2 {
   public moveTo(v: PointLike): this;
   public moveTo(x: number, y: number): this;
   public moveTo(a: number | PointLike, b?: number): this {
-    if (typeof a === 'number' && typeof b === 'number') {
+    if (
+      typeof a === 'number'
+      && typeof b === 'number'
+    ) {
       this.x = a;
       this.y = b;
-    } else if (isPointLike(a) === true) {
-      a = a as PointLike;
-
+    } else if (isPointLike(a)) {
       this.equals(a);
     }
 
@@ -636,9 +624,9 @@ export class Vector2 {
 
   static projectFrom(from: PointLike, direction: PointLike, by: number): Vector2 {
     const to = Vector2
-    .clone(direction)
-    .normalize()
-    .multiply(by);
+      .clone(direction)
+      .normalize()
+      .multiply(by);
 
     return Vector2.add(from, to);
   }
@@ -744,14 +732,14 @@ export class Vector2 {
   // static perpendicular(): Vector2 {}
 
   static getCenterVector(...v: PointLike[]): Vector2 {
-    const left = this.minX(...v);
-    const right = this.maxX(...v);
-    const top = this.minY(...v);
+    const left   = this.minX(...v);
+    const right  = this.maxX(...v);
+    const top    = this.minY(...v);
     const bottom = this.maxY(...v);
 
     return new Vector2(
-      left + (right - left) / 2,
-      top + (bottom - top) / 2
+      left + (right  - left) / 2,
+      top  + (bottom - top)  / 2
     );
   }
 

@@ -3,6 +3,7 @@ import {
   cubicBezier,
   cycleNumber,
   hypotenuse,
+  isNumber,
   transform,
 } from '@nekobird/piko';
 
@@ -31,10 +32,10 @@ export class Vector2 {
   constructor(p: PointLike);
   constructor();
   constructor(a?: number | PointLike, b?: number) {
-    if (typeof a === 'number' && typeof b === 'number') {
+    if (isNumber(a) && isNumber(b)) {
       this.x = a;
       this.y = b;
-    } else if (typeof a === 'number' && typeof b !== 'number') {
+    } else if (isNumber(a) && !isNumber(b)) {
       this.x = a;
       this.y = a;
     } else if (isPointLike(a)) {
@@ -50,10 +51,10 @@ export class Vector2 {
   public equals(v: Vector2): this;
   public equals(p: PointLike): this;
   public equals(a?: number | PointLike, b?: number): this {
-    if (typeof a === 'number' && typeof b === 'number') {
+    if (isNumber(a) && isNumber(b)) {
       this.x = a;
       this.y = b;
-    } else if (typeof a === 'number' && typeof b !== 'number') {
+    } else if (isNumber(a) && !isNumber(b)) {
       this.x = a;
       this.y = a;
     } else if (isPointLike(a)) {
@@ -168,10 +169,10 @@ export class Vector2 {
     if (isPointLike(a)) {
       this.x += a.x;
       this.y += a.y;
-    } else if (typeof a === 'number' && typeof b === 'number') {
+    } else if (isNumber(a) && isNumber(b)) {
       this.x += a;
       this.y += b;
-    } else if (typeof a === 'number' && typeof b !== 'number') {
+    } else if (isNumber(a) && !isNumber(b)) {
       this.x += a;
       this.y += a;
     }
@@ -183,9 +184,9 @@ export class Vector2 {
   public addX(v: Vector2): this;
   public addX(p: PointLike): this;
   public addX(a: number | PointLike): this {
-    if (typeof a === 'number') {
+    if (isNumber(a)) {
       this.x += a;
-    } else if (typeof a === 'object' && typeof a.x === 'number') {
+    } else if (typeof a === 'object' && isNumber(a.x)) {
       this.x += a.x;
     }
 
@@ -196,9 +197,9 @@ export class Vector2 {
   public addY(v: Vector2): this;
   public addY(p: PointLike): this;
   public addY(a: number | PointLike): this {
-    if (typeof a === 'number') {
+    if (isNumber(a)) {
       this.y += a;
-    } else if (typeof a === 'object' && typeof a.y === 'number') {
+    } else if (typeof a === 'object' && isNumber(a.y)) {
       this.y += a.y;
     }
 
@@ -213,10 +214,10 @@ export class Vector2 {
     if (isPointLike(a)) {
       this.x -= a.x;
       this.y -= a.y;
-    } else if (typeof a === 'number' && typeof b !== 'number') {
+    } else if (isNumber(a) && !isNumber(b)) {
       this.x -= a;
       this.y -= a;
-    } else if (typeof a === 'number' && typeof b === 'number') {
+    } else if (isNumber(a) && isNumber(b)) {
       this.x -= a;
       this.y -= b;
     }
@@ -228,9 +229,9 @@ export class Vector2 {
   public subtractX(v: Vector2): this;
   public subtractX(p: PointLike): this;
   public subtractX(a: number | PointLike): this {
-    if (typeof a === 'number') {
+    if (isNumber(a)) {
       this.x -= a;
-    } else if (typeof a === 'object' && typeof a.x === 'number') {
+    } else if (typeof a === 'object' && !isNumber(a.x)) {
       this.x -= a.x;
     }
 
@@ -241,9 +242,9 @@ export class Vector2 {
   public subtractY(v: Vector2): this;
   public subtractY(p: PointLike): this;
   public subtractY(a: number | PointLike): this {
-    if (typeof a === 'number') {
+    if (isNumber(a)) {
       this.y -= a;
-    } else if (typeof a === 'object' && typeof a.y === 'number') {
+    } else if (typeof a === 'object' && !isNumber(a.y)) {
       this.y -= a.y;
     }
 
@@ -258,10 +259,10 @@ export class Vector2 {
     if (isPointLike(a)) {
       this.x *= a.x;
       this.y *= a.y;
-    } else if (typeof a === 'number' && typeof b !== 'number') {
+    } else if (isNumber(a) && !isNumber(b)) {
       this.x *= a;
       this.y *= a;
-    } else if (typeof a === 'number' && typeof b === 'number') {
+    } else if (isNumber(a) && isNumber(b)) {
       this.x *= a;
       this.y *= b;
     }
@@ -273,7 +274,7 @@ export class Vector2 {
   public multiplyX(v: Vector2): this;
   public multiplyX(p: PointLike): this;
   public multiplyX(a: number | PointLike): this {
-    if (typeof a === 'number') {
+    if (isNumber(a)) {
       this.x *= a;
     } else if (isPointLike(a)) {
       this.x *= a.x;
@@ -286,7 +287,7 @@ export class Vector2 {
   public multiplyY(v: Vector2): this;
   public multiplyY(p: PointLike): this;
   public multiplyY(a: number | PointLike): this {
-    if (typeof a === 'number') {
+    if (isNumber(a)) {
       this.y *= a;
     } else if (isPointLike(a)) {
       this.y *= a.y;
@@ -300,14 +301,14 @@ export class Vector2 {
   public divide(v: Vector2): this;
   public divide(p: PointLike): this;
   public divide(a: number | PointLike, b?: number): this {
-    if (typeof a === 'number' && typeof b !== 'number') {
+    if (isNumber(a) && !isNumber(b)) {
       if (a === 0) {
         throw new Error('Vector2: Division by zero.');
       } else {
         this.x /= a;
         this.y /= a;
       }
-    } else if (typeof a === 'number' && typeof b === 'number') {
+    } else if (isNumber(a) && isNumber(b)) {
       if (a === 0 || b === 0) {
         throw new Error('Vector2: Division by zero.');
       } else {
@@ -330,7 +331,7 @@ export class Vector2 {
   public divideX(v: Vector2): this;
   public divideX(p: PointLike): this;
   public divideX(a: number | PointLike): this {
-    if (typeof a === 'number') {
+    if (isNumber(a)) {
       if (a === 0) {
         throw new Error('Vector2: Division by zero.');
       } else {
@@ -351,15 +352,13 @@ export class Vector2 {
   public divideY(v: Vector2): this;
   public divideY(p: PointLike): this;
   public divideY(a: number | PointLike): this {
-    if (typeof a === 'number') {
+    if (isNumber(a)) {
       if (a === 0) {
         throw new Error('Vector2: Division by zero.');
       } else {
         this.y /= a;
       }
-    } else if (isPointLike(a) === true) {
-      a = a as PointLike;
-
+    } else if (isPointLike(a)) {
       if (a.y === 0) {
         throw new Error('Vector2: Division by zero.');
       } else {
@@ -375,13 +374,11 @@ export class Vector2 {
   }
 
   get angle() {
-    let angle = Math.acos(this.x / this.magnitude);
+    const angle = Math.acos(this.x / this.magnitude);
 
-    if (this.y < 0) {
-      angle = Math.PI + (Math.PI - angle);
-    }
-
-    return angle;
+    return this.y < 0
+      ? Math.PI + (Math.PI - angle)
+      : angle;
   }
 
   public getAngleFrom(from: PointLike): number {
@@ -390,13 +387,11 @@ export class Vector2 {
 
     const m = hypotenuse(x, y);
 
-    let angle = Math.acos(x / m);
+    const angle = Math.acos(x / m);
 
-    if (y < 0) {
-      angle = Math.PI + (Math.PI - angle);
-    }
-
-    return angle;
+    return y < 0
+      ? Math.PI + (Math.PI - angle)
+      : angle;
   }
 
   public getAngleTo(to: PointLike): number {
@@ -405,23 +400,18 @@ export class Vector2 {
 
     const m = hypotenuse(x, y);
 
-    let angle = Math.acos(x / m);
+    const angle = Math.acos(x / m);
 
-    if (y < 0) {
-      angle = Math.PI + (Math.PI - angle);
-    }
-
-    return angle;
+    return y < 0
+      ? Math.PI + (Math.PI - angle)
+      : angle;
   }
 
   public moveBy(v: PointLike): this;
   public moveBy(x: number): this;
   public moveBy(x: number, y: number): this;
   public moveBy(a: number | PointLike, b?: number): this {
-    if (
-      typeof a === 'number'
-      && typeof b === 'number'
-    ) {
+    if (isNumber(a) && isNumber(b)) {
       this.x += a;
       this.y += b;
     } else if (isPointLike(a)) {
@@ -434,10 +424,7 @@ export class Vector2 {
   public moveTo(v: PointLike): this;
   public moveTo(x: number, y: number): this;
   public moveTo(a: number | PointLike, b?: number): this {
-    if (
-      typeof a === 'number'
-      && typeof b === 'number'
-    ) {
+    if (isNumber(a) && isNumber(b)) {
       this.x = a;
       this.y = b;
     } else if (isPointLike(a)) {

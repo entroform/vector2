@@ -1,6 +1,6 @@
 {
   "name": "@nekobird/vector2",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "description": "Vector2 library.",
   "keywords": [
@@ -23,7 +23,8 @@
   "sideEffects": false,
   "main": "build/commonjs/vector2.js",
   "module": "build/esm/vector2.js",
-  "jsnext:main": "build/esm/piko.js",
+  "jsnext:main": "build/esm/vector2.js",
+  "types": "build/types/source/vector2.d.ts",
   "scripts": {
     "build": "npm run clean; tsc --emitDeclarationOnly --outDir build/types/; rollup -c rollup.config.js",
     "clean": "rimraf build",
@@ -31,14 +32,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@nekobird/piko": "0.0.7"
+    "@nekobird/piko": "0.0.11"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.3",
+    "@babel/core": "^7.8.4",
     "@babel/plugin-transform-typescript": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
     "@babel/preset-typescript": "^7.8.3",
-    "rimraf": "^3.0.0",
+    "rimraf": "^3.0.1",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^5.2.0",
